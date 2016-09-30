@@ -11,45 +11,53 @@ def main():
 
     start_time = time.time()
 
-    home_dir = os.getcwd()
+    directory = os.getcwd()     #get current directory
+    print (directory)
+    training_dir = os.path.join(directory, os.path.relpath('Data', directory))
+    print (training_dir)
+    training_collection = os.listdir(training_dir)
 
-    # train - use directories as labeled items
-#    training_list = list()
-
-    # build training_dir to direct to Data in directory above .py
-#    directory = os.path.split(home_dir)[0]
-#    training_dir = os.path.join(directory, 'Data')
+    training_list = list()
 
     # populate training_list with lists from each dataset
-#    for training_set in os.listdir(training_dir):
- #       set_list = list()
-#        os.chdir(training_dir)
- #       training_files = os.listdir(training_set)
-        # print training_files
+    for training_set in training_collection:
+        print (training_set)
 
-#        os.chdir(training_set)
-#        for image_file in training_files:
-            #image = Image.open(image_file)
-            #arr = np.array(image)
-            #set_list.append(arr)
-#            set_list.append(misc.imread(image_file))
 
-#        training_list.append(set_list)
+
+        training_path = os.path.join(training_dir, training_set)
+        print (training_path)
+
+        image_files =  [ image_file for image_file in os.listdir(training_path) if os.path.isfile(os.path.join(training_path, image_file)) ]
+        # print image_files
+
+        set_list = list()               #initialize a list for the numpy arrays containing images
+        for image_file in image_files:
+            image = Image.open(os.path.join(training_path, image_file))
+            arr = np.array(image)
+            set_list.append(arr)
+
+        training_list.append(set_list)
 
     # os.chdir(home_dir)
 
-##    data_smile = np.array(training_list[0])
-#    data_hat = np.array(training_list[1])
-#    data_hash = np.array(training_list[2])
-#    data_heart = np.array(training_list[3])
-#    data_dollar = np.array(training_list[4])
+    data_smile = np.array(training_list[0])
+    data_hat = np.array(training_list[1])
+    data_hash = np.array(training_list[2])
+    data_heart = np.array(training_list[3])
+    data_dollar = np.array(training_list[4])
 
-    #data = np.array(training_list, dtype=np.uint8)
-#    data = np.array([data_smile, data_hat, data_hash, data_heart, data_dollar])
+
+
+
     # see sklearn svm
-#    clf = svm.SVC()
+    clf = svm.SVC()
 
-#    clf.fit(data, ['smile', 'hat', 'hash', 'heart', 'dollar'])
+    data = np.array([data_smile, data_hat, data_hash, data_heart, data_dollar])
+    labels = ['smile', 'hat', 'hash', 'heart', 'dollar']
+
+    #clf.fit(clf, data, labels)
+
 
 #    test_dir = os.path.join(directory, 'Test')
 #    os.chdir(test_dir)
