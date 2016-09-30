@@ -9,9 +9,9 @@ from scipy import misc
 
 def main():
 
-#    start_time = time.time()
+    start_time = time.time()
 
-#    home_dir = os.getcwd()
+    home_dir = os.getcwd()
 
     # train - use directories as labeled items
 #    training_list = list()
@@ -56,8 +56,10 @@ def main():
 #    submitted_image = misc.imread(sys.argv[1])
     # print ("Image is a " + clf.predict(np.array(Image.open(sys.argv[1]).getdata())))
 #    print (clf.predict())
-#    print ("Time taken: " + str(time.time() - start_time) + ' s')
-    # sys.exit()
     print ("End")
+    print ("Time taken: " + str(time.time() - start_time) + ' s')
+
+
+    sys.exit()
 
 main()  # sys.argv[1]
